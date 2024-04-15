@@ -10,13 +10,24 @@ export default function Home() {
   const [userMessage, setUserMessage] = useState('');
 
   const sendMessage = () => {
-    console.log(userMessage);
-    axios.post('https://regtech-4329468cae90.herokuapp.com/api/message', { message: userMessage }).
-    then(response => {
-      console.log(response.data);
-    }).catch(error => {
-      console.error(error);
-    });
+    axios.post('https://regtech-4329468cae90.herokuapp.com/api/message', { message: userMessage }, {
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    })
+      .then(response => {
+        if (response) {
+          console.log('Response received');
+          if (response.data) {
+            console.log(response.data);
+          } else {
+            console.log('No data in response');
+          }
+        }
+      })
+      .catch(error => {
+        console.error(error);
+      });
   }
 
   return (
