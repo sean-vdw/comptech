@@ -1,12 +1,22 @@
-import { Fragment, useState } from 'react'
+import React, { Fragment, useState } from 'react'
 import { FaceSmileIcon as FaceSmileIconOutline, PaperClipIcon } from '@heroicons/react/24/outline'
-import { Listbox, Transition } from '@headlessui/react'
+import axios from 'axios';
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(' ')
 }
 
 export default function Home() {
+  const [userMessage, setUserMessage] = useState('');
+
+  const sendMessage = () => {
+    axios.post('http://localhost:5000/api/v1/messages', { message: userMessage }).
+    then(response => {
+      console.log(response.data);
+    }).catch(error => {
+      console.error(error);
+    });
+  }
 
   return (
     <div className="flex items-start space-x-4 max-w-2xl mx-auto my-8">
@@ -23,6 +33,8 @@ export default function Home() {
               className="block w-full resize-none border-0 border-b border-transparent p-0 pb-2 text-gray-900 placeholder:text-gray-400 focus:border-teal-600 focus:ring-0 sm:text-sm sm:leading-6"
               placeholder="Add the URL or paste the content you would like to analyze..."
               defaultValue={''}
+              value={userMessage}
+              onChange={(e) => setUserMessage(e.target.value)}
             />
           </div>
           <div className="flex justify-between pt-2">
@@ -39,6 +51,7 @@ export default function Home() {
             </div>
             <div className="flex-shrink-0">
               <button
+                onClick={sendMessage}
                 type="submit"
                 className="inline-flex items-center rounded-md bg-teal-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-teal-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-teal-600"
               >
