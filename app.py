@@ -7,6 +7,10 @@ import os
 app = Flask(__name__)
 CORS(app)
 
+@app.route('/', methods=['GET'])
+def home():
+    return "Application is running!", 200
+
 @app.route('/api/message', methods=['POST'])
 def get_message():
     load_dotenv()
