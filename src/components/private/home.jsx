@@ -32,7 +32,6 @@ export default function Home() {
               id="comment"
               className="block w-full resize-none border-0 border-b border-transparent p-0 pb-2 text-gray-900 placeholder:text-gray-400 focus:border-teal-600 focus:ring-0 sm:text-sm sm:leading-6"
               placeholder="Add the URL or paste the content you would like to analyze..."
-              defaultValue={''}
               value={userMessage}
               onChange={(e) => setUserMessage(e.target.value)}
             />
