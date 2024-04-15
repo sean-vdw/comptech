@@ -10,7 +10,8 @@ export default function Home() {
   const [userMessage, setUserMessage] = useState('');
 
   const sendMessage = () => {
-    axios.post('http://localhost:5000/api/v1/messages', { message: userMessage }).
+    console.log(userMessage);
+    axios.post('https://regtech-4329468cae90.herokuapp.com/api/message', { message: userMessage }).
     then(response => {
       console.log(response.data);
     }).catch(error => {
